@@ -136,6 +136,29 @@
   - Linux-KI , perf
 - 성능 측정 후, 하이퍼쓰레드 사용이 무조건 성능이 좋았음 다만 자원 경합으로 인한 stall 증가 모니터링이 필요함
 
+
+# Next 코어뱅킹, MSA와 MySQL로 여는 평생 무료 환전 시대
+> https://www.youtube.com/watch?v=uWnAVYgCd0k
+
+- 코어뱅킹이 모놀리식으로 구성되어 있어서 MSA로 전환함
+- 여전히 DB만은 Oracle 의존적인 코어뱅킹 아키텍처
+- 왜 모든 은행은 Oracle만 사용하고 있을까?
+  - 장점
+    - 신뢰성과 안정성 : 트랜잭션 관리, 고가용성, 복구기능, 데이터 무결성 보장
+    - 확장성, 성능, 오랜기간 축적된 노하우
+  - 단점
+    - SPOF (Single Point Of Failure), 비싼 비용, 제한적인 Scale-out
+- 대체 배경
+  - 트랜잭션 관리의 진화 : Redis 분산락, Kafka 활용한 SAGA 패턴
+  - 확장성 : MySQL Repolication 전략
+  - 안정성 : MySQL MVCC 기술
+- 동시성 제어를 위해 Redis 분산락을 사용, DB에서는 비관적 Lock 을 사용
+- 24/365 무중단 환전 서비스 구현 방법
+- 테스트 자동화
+  - Local : 단위 테스트, DEV : E2E 테스트 활용, Live : 이상거래탐지 서비스 개발 (데이터 완결성 검증)
+  
+
+
 # 알아보면 좋을것
 P6SPY, ANTLR 을 통해 쿼리 추출을 진행했다는데, 어떻게 한걸까? (서비스 쿼리 추출에 사용?)
 

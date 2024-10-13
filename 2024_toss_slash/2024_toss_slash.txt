@@ -162,5 +162,81 @@
 
 - 함께 일하고 싶은 개발자는 문제가 발생하면 우회로를 찾아 해결하는것이 아니라 원인을 끝까지 분석하고 해결하여, 공유하는 개발자
 - 개발자로서 책임감을 갖고 일하더라도 장애발생은 어쩔수 없다. 다만 그걸 비난하지 않고 문제해결에 집중하며, 재발방지를 위해 노력하는 문화가 좋았다.
-- 
+
+# SSE 이벤트 푸쉬로 불필요한 Polling 제거하기
+> https://www.youtube.com/watch?v=ovGgdPPUZ2I
+
+- WebSocket : 양방향 통신이 필요함, 송/수신량 데이터량이 많을때 사용
+- SSE : 불필요한 polling 제거할때, 개인화된 데이터를 이용한 이벤트 푸쉬에 사용
+  - content-type: text/event-stream
+- client side message 전략
+  - broadcasting, unicasting
+- server side message 전략
+  - message 역할로 kafka, redis pubsub, nats 중 nats 사용
+- SSE 구성시, SSE Connection이 close 되는지 적절한 모니터링이 필요할것 같다.
+
+# 클릭 한 번으로 테스트 45만 개 완료! 테스트 자동화 플랫폼 구축기
+> https://www.youtube.com/watch?v=cGks5f2f0YE
+
+- 기존 테스트 자동화의 문제
+  - 표준화 되지 않은 다양한 테스트 자동화 도구 사용
+  - 표준화 되지 않은 자동화 코드의 공유
+  - 테스트 결과 가공의 어려움
+- Playwright 사용
+- Reporter 결과를 전달할 수 있음
+
+# 약은 약사에게, 테스트는 토스 닥터에게!
+> https://www.youtube.com/watch?v=DwqwUsFmoCU
+
+- Smoke Test : 전자 회로 기판에 전원을 넣었을 때 기판에서 연기가 나는지 확인하는 테스트, 테스트 케이스 없이 E2E로 확인하는 테스트
+- Appium 사용하여 자동화 진행
+- Python 을 활용하여 테스트 케이스 분리 및 테스트 실시간 모니터링 진행
+
+# 대외계 구조 개선과 모니터링 강화로 시스템 연속성 확보하기
+> https://www.youtube.com/watch?v=TgHueXsfcPg
+
+- 이중화를 통해 가용성 증가
+- eBGP, iBGP 사용
+  - iBGP : 서로 같은 AS(Anonymous System) 상의 Border Gateway들 끼리의 연결을 담당하는 BGP
+  - eBGP : 서로 다른 AS 상의 Border Gateway들 끼리의 연결을 담당하는 BGP 
+- BGP : Border Gateway Protocol 
+- MTR : My Traceroute
+- RTT : 데이터 패킷이 대상으로 전송되는 데 걸리는 시간과 해당 패킷에 대한 승인이 원본에서 다시 수신되는 데 걸리는 시간을 더한 
+- NAT, Proxy, GSLB 통해 네트워크 outbound 안정성 유지
+  - NAT : 백본망의 라우팅을 단순화 시키고 중첩 될 수 있는 기관의 아이피를 해결
+  - Proxy : 기관 서버 상태 체크 및 분산처리하며 응답 속도등을 측정
+  - GSLB : 기관 통신을 도메인 기반으로 변경하고 프록시 장비의 장애를 감지하여 우회
+
+# 팀에 Winning Mentality를 불어넣는 리더십 스킬
+> https://www.youtube.com/watch?v=h7HksW-Is7s
+
+- 개인의 집합은 팀이 아니다. 공동 목표를 함께 이루어 변화를 만드는 관계
+- 신뢰, 협력, 이해의 부족이 Blocker
+- 신뢰의 출발, 감정 존중
+  - 감정을 말할 수 있는 1명이 안정감의 원천
+- 신뢰 받는 리더 되기 
+  - 상대가 망치지 않을 것을 믿는게 아니라, 망쳐도 믿는 것
+- 멤버 간 신뢰 만들기
+  - 리더는 siwtch : 계기 / 연결 / 빠지기
+  - '새벽 3시까지 다른 멤버의 장애를 함께 봐주기'
+- 신뢰하지 않아야 할 때
+  - 실력은 항상 신뢰에 앞선다
+  - 실력이 담보된 상태에서 신뢰를 주기
+- 협력을 높이는 특성 Position
+  - 특성에 맞는 역할을 찾고, 서로 보완하여 팀의 총점을 키우는 전략
+- 이해를 높이는 Ground Rule 만들기
+  - 서로 다름이 기본값, 불만과 갈등을 넘기지 않고 함께 불편해하기
+  - 불편을 해소하는 규칙이 쌓이면 Engineering Culture
+- Winning Mentality
+  - 자율적으로 목표를 찾고 초과 성과를 내는 과정을 반복
+- 목표 수립은 모두의 것
+  - 계획 수립과 자기 주도적 행동은 뇌의 보상 시스템을 활성화
+  - 자율성은 팀 만족도와 더 높은 성과 수준을 위한 필수 조건
+- Hidden 목표 이해하기
+  - 개인에게는 (숨겨진) 삶의 목표가 있음
+  - 팀 목표와 개인 목표는 종종 상충되고, 퍼포먼스를 낮춤
+  - 팀의 상황이 고려된 개인 목표가 수립 될 수 있도록 코칭과 협의도 중요
+- 기술팀에 필요한 비기술 리더십
+  - 엔지니어에게 가장 재미있는 것은 기술을 통해 변화와 가치를 만드는 일
+  - 모든 방해 요소를 식별하고 하나씩 제거해 나가기
 

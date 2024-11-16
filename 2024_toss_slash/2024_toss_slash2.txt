@@ -1,0 +1,24 @@
+# 토스 | SLASH 24 #2
+
+# 생산성과 안정성 모두 잡는 마스터키, Canary 배포 개선기
+> https://www.youtube.com/watch?v=ApNj9MZU7Ak
+
+## 배포 전략
+1. rolling update
+  - 이슈 발생시 - 중단 불가
+2. canary
+  - 이슈 발생시 롤백 가능
+- 내부서비스에는 rolling update 가 적합하나 대외서비스는 canary 배포가 적합
+- 프론트
+- Sticky Canary
+  - 동일한 세션은 canary 배포때 동일한 서버로 요청이 가도록 고정
+  - istio 기능을 이용한 sticky Canary 구현을 고려했으나, canary 배포시 비율을 수정해야하는데, 이러면 다시 세션마다 서버를 할당받아야함
+  - gateway와 virtualService를 두었음
+  - unique 한 헤더값 및 해시계산으로 버전을 판별하여 virtual service에서 라우팅해줌
+- Auto Canary
+  - 시스템도 모니터링 하도록 하자
+  - vivasystem이라는 플랫폼에서 모니터링을 자동으로 하고 문제시, Auto Rollback 을 진행하도록 함
+
+
+# 보상 트랜잭션으로 분산 환경에서도 안전하게 환전하기
+> https://www.youtube.com/watch?v=xpwRTu47fqY
